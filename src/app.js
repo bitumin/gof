@@ -108,7 +108,7 @@ function $gameItemFactory(name, dir, version, size, files, nfiles) {
         '>' +
             '<b>' + name + '</b> ' +
             '<small>' +
-                'v' + version + ' ' +
+                version + ' ' +
                 '(' + formatBytes(size) + ')' +
             '</small> ' +
             '<span class="status-label"></span>' +

@@ -4,8 +4,8 @@
 
 nw.Window.open('./src/views/index.html', {
     position: 'center',
-    width: 700,
-    height: 500,
-    min_width: 700,
-    min_height: 500
+    width: 800,
+    height: 600,
+    min_width: 800,
+    min_height: 600
 }, function(win) {});
