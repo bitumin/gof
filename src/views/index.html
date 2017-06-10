@@ -17,8 +17,17 @@
     <![endif]-->
 
     <style>
+        .progress {
+            position: relative;
+            margin-bottom: 0;
+        }
+        .progress-bar > span {
+            position: absolute;
+            display: block;
+            width: 100%;
+        }
         .dim {
-            background: rgba(0, 0, 0, .5) url('../img/puff.svg') no-repeat;
+            background: rgba(0, 0, 0, .5) url('../img/puff.svg') no-repeat center center;
             width: 100%;
             height: 100%;
             position: fixed;
@@ -29,20 +38,25 @@
     </style>
 </head>
 <body>
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!--Loading screen-->
+<div class="loading-screen dim hidden"></div>
+<!-- Navbar -->
+<nav class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Good Old Friends</a>
         </div>
-        <div class="nav navbar-nav navbar-right">
-            Connection status: <span class="label label-danger connection-status">Not connected</span>
+        <div class="collapse navbar-collapse">
+            <p class="navbar-text navbar-right">
+                Connection status: <span class="label label-danger connection-status">Not connected</span>
+            </p>
         </div>
     </div>
 </nav>
 
-<div class="container" id="ip-page">
-    <div class="row">
+<div class="container pages-container">
+    <!--Home page-->
+    <div class="row" id="home-page">
         <div class="col-xs-12 text-center form-container">
             <form action="javascript:">
                 <div class="form-group">
@@ -54,10 +68,8 @@
             </form>
         </div>
     </div>
-</div>
-
-<div class="container hidden" id="list-page">
-    <div class="row">
+    <!--Games list page-->
+    <div class="row hidden" id="list-page">
         <div class="col-xs-12 text-center list-container">
             <div class="list-group games-list">
                 Loading...
@@ -68,100 +80,8 @@
 
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script type="application/javascript">
-    const fs = require('fs');
-    const url = require('url');
-    const http = require('http');
-    const appPort = 8138;
-    /**
-     * @param ip
-     * @returns {boolean}
-     */
-    function validateIP(ip) {
-        return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip);
-    }
-    function dimBody() {
-        $('body').addClass('dim');
-    }
-    function unDimBody() {
-        $('body').removeClass('dim');
-    }
-    function notifyError(msg) {
-        $('.form-container').prepend('<div class="alert alert-danger">' + msg + '</div>');
-    }
-    const unableToConnectMsg = '<strong>Unable to connect!</strong> You friend seems to not be available... is he running the app?';
-    const invalidIpMsg = '<strong>Invalid IP!</strong> The IP you have written does not have a valid format, try again.';
-    function setConnectionToConnected() {
-        $('.connection-status').removeClass('label-danger').addClass('label-success').html('Connected');
-    }
-    function setConnectionToNotConnected() {
-        $('.connection-status').removeClass('label-success').addClass('label-danger').html('Not connected');
-    }
-    function download(ip, dir, file) {
-        let fileUrl = 'http://' + ip + ':' + appPort + '/download/' + dir + '/' + file;
-        let options = {
-            host: url.parse(fileUrl).host,
-            port: 80,
-            path: url.parse(fileUrl).pathname
-        };
-
-        let File = fs.createWriteStream('./' + file);
-        http.get(options, function (res) {
-            let fsize = res.headers['content-length'];
-            res.on('data', function (data) {
-                File.write(data);
-                progress(100 - (((fsize - file.bytesWritten) / fsize) * 100), $('#progressBar'));
-            }).on('end', function () {
-                File.end();
-            });
-        });
-    }
-    function progress(percent, $element) {
-        console.log("Download: " + parseInt(percent) + " %")
-        var progressBarWidth = percent * $element.width() / 100;
-        $element.find('div').css("width", progressBarWidth);
-    }
-    function $gameItemFactory(name, version, size, files, nfiles) {
-        return $(
-            '<a href="#" class="list-group-item game-item" id="name"' +
-            ' data-name="' + name + '"' +
-            ' data-version="' + version + '"' +
-            ' data-size="' + size + '"' +
-            ' data-files="' + files + '"' +
-            ' data-nfiles="' + nfiles + '"' +
-            '>' +
-            name +
-            version +
-            '<div class="progress">' +
-            '<div class="progress-file-counter"></div>' +
-            '<div class="progress-bar"></div>' +
-            '</div>' +
-            '</a>'
-        )
-    };
-
-    $('.connect-btn').click(function (e) {
-        dimBody();
-        let ip = $('#ip').val();
-        if (!validateIP(ip)) {
-            unDimBody();
-            notifyError(invalidIpMsg);
-        }
-
-        $.getJSON('', {}, function () {
-
-        });
-    });
-    // On connect click -
-    // show connecting...
-    // parse ip input, sanitize and validate
-
-    // Make GET list request to ip
-
-    //
-
-
+<script src="../bower_components/underscore/underscore-min.js"></script>
+<script src="../app.js">
 </script>
 </body>
 </html>

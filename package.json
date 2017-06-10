@@ -2,7 +2,9 @@
   "name": "good-old-friends",
   "description": "Good Old Friends",
   "version": "0.0.1",
-  "main": "./src/index.html",
+  "main": "./src/index.js",
+  "nodejs": true,
+  "node-main": "./src/httpserver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dist": "build --tasks win-x64 --mirror https://dl.nwjs.io/ .",

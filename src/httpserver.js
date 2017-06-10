@@ -80,6 +80,7 @@ gogGalaxyPathsReg.get('client', function (err, gogGalaxyClientPath) {
             console.error('ERROR RESPONSE: Could not find path ' + backupsPath);
             res.setHeader('Content-Type', 'application/json');
             res.send({error:{code: 404, msg: 'Requested file not found in server.'}});
+            return;
         }
         console.info('INFO RESPONSE: Serving ' + filePath + ' file to ' + req.ip);
 
