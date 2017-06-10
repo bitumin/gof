@@ -54,7 +54,7 @@ gogGalaxyPathsReg.get('client', function (err, gogGalaxyClientPath) {
                 size += fileStats.size;
                 // Fetch game version
                 if (null === version && '.exe' === path.extname(file)) {
-                    version = file.substr(-11, 7); // ex.: 'setup_sw_kotor2_2.0.0.3.exe' -> '2.0.0.3'
+                    version = file.match(/([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)/)[0];
                 }
                 // Add file to files list
                 files.push(file);
