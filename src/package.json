@@ -1,0 +1,21 @@
+{
+  "name": "good-old-friends",
+  "version": "0.0.1",
+  "description": "Good Old Friends",
+  "main": "./index.html",
+  "nodejs": true,
+  "node-main": "./httpserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mitxel Moriana",
+  "license": "ISC",
+  "dependencies": {
+    "dist-exiftool": "^10.53.0",
+    "express": "^4.15.3",
+    "node-exiftool": "^2.2.0",
+    "promisify-node": "^0.4.0",
+    "underscore-node": "^0.1.2",
+    "winreg": "^1.2.4"
+  }
+}

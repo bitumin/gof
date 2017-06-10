@@ -1,0 +1,53 @@
+{
+  "name": "good-old-friends",
+  "description": "Good Old Friends",
+  "version": "0.0.1",
+  "main": "./src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "build --tasks win-x64 --mirror https://dl.nwjs.io/ .",
+    "start": "run --x64 --mirror https://dl.nwjs.io/ ."
+  },
+  "author": "Mitxel Moriana",
+  "license": "ISC",
+  "devDependencies": {
+    "nwjs-builder-phoenix": "^1.14.1"
+  },
+  "build": {
+    "appId": "bitumin.good-old-friends.app",
+    "nwVersion": "0.23.1",
+    "packed": true,
+    "strippedProperties": [
+      "build"
+    ],
+    "targets": [
+      "zip",
+      "nsis7z"
+    ],
+    "nsis": {
+      "installDirectory": "$PROGRAMFILES\\${_COMPANYNAME}\\${_APPNAME}",
+      "diffUpdaters": true
+    },
+    "outputPattern": "${NAME}-${VERSION}-${PLATFORM}-${ARCH}",
+    "win": {
+      "versionStrings": {
+        "ProductName": "good-old-friends",
+        "CompanyName": "bitumin",
+        "LegalCopyright": "copyright"
+      },
+      "icon": "./res/gog_galaxy__the_tatami_galaxy_icon_by_snowie0wl-d9z2u28.ico"
+    },
+    "mac": {
+      "displayName": "good-old-friends",
+      "copyright": "copyright",
+      "icon": "./res/gog_galaxy__the_tatami_galaxy_icon_by_snowie0wl-d9z2u28.icns",
+      "plistStrings": {
+        "CFBundleIdentifier": "bitumin.gof.project",
+        "CFBundleDocumentTypes": []
+      }
+    }
+  },
+  "window": {
+    "icon": "./res/gog_galaxy__the_tatami_galaxy_icon_by_snowie0wl-d9z2u28.ico"
+  }
+}
