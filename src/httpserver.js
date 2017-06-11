@@ -54,7 +54,7 @@ gogGalaxyPathsReg.get('client', function (err, gogGalaxyClientPath) {
                 size += fileStats.size;
                 // Fetch game version
                 if (null === version && '.exe' === path.extname(file)) {
-                    let rawVersion = file.match(/([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)/);
+                    let rawVersion = file.match(/([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)|([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)/);
                     if (Array.isArray(rawVersion)) {
                         version = rawVersion[0];
                     }
@@ -82,7 +82,7 @@ gogGalaxyPathsReg.get('client', function (err, gogGalaxyClientPath) {
         if (!fs.existsSync(filePath)) {
             console.error('ERROR RESPONSE: Could not find path ' + backupsPath);
             res.setHeader('Content-Type', 'application/json');
-            res.send({error:{code: 404, msg: 'Requested file not found in server.'}});
+            res.send({error: {code: 404, msg: 'Requested file not found in server.'}});
             return;
         }
         console.info('INFO RESPONSE: Serving ' + filePath + ' file to ' + req.ip);
