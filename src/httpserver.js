@@ -54,7 +54,7 @@ gogGalaxyPathsReg.get('client', function (err, gogGalaxyClientPath) {
                 size += fileStats.size;
                 // Fetch game version
                 if (null === version && '.exe' === path.extname(file)) {
-                    let rawVersion = file.match(/([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)|([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)\.([0-9]?[0-9]?[0-9][0-9]?)/);
+                    let rawVersion = file.match(/\d+(?:\.+\d+){3}|\d+(?:\.+\d+){2}|\d+(?:\.+\d+)/);
                     if (Array.isArray(rawVersion)) {
                         version = rawVersion[0];
                     }
