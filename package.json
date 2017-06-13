@@ -1,7 +1,7 @@
 {
   "name": "good-old-friends",
   "description": "Good Old Friends",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./src/index.js",
   "nodejs": true,
   "node-main": "./src/httpserver.js",

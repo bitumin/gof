@@ -1,6 +1,6 @@
 {
   "name": "good-old-friends",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Good Old Friends",
   "main": "./index.js",
   "nodejs": true,
